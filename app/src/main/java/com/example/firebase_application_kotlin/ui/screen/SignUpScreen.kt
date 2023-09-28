@@ -54,7 +54,9 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.firebase_application_kotlin.R
+import com.example.firebase_application_kotlin.Screen
 import com.example.firebase_application_kotlin.data.SignUp
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -63,7 +65,7 @@ import java.io.ByteArrayOutputStream
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpScreen(){
+fun SignUpScreen(navController: NavHostController){
 
     var imgUrl by remember{ mutableStateOf("") }
     val database = Firebase.database
@@ -308,6 +310,7 @@ fun SignUpScreen(){
                                 val user= SignUp(password,imageUrl)
                                 userRef.setValue(user)
                                 Toast.makeText(context,"Save User", Toast.LENGTH_SHORT).show()
+                                navController.navigate(Screen.FormScreen.route)
                             }
                             else{
                             }
